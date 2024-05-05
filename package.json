@@ -1,7 +1,7 @@
 {
-  "name": "nestjs-skeleton",
+  "name": "nestjs-template",
   "version": "1.0.0",
-  "description": "NestJs Skeleton",
+  "description": "NestJs template + Docker hot reload (Windows supported)",
   "author": "MHP24",
   "private": true,
   "license": "UNLICENSED",
