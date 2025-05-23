@@ -27,7 +27,7 @@ This template includes a development setup and environment multi OS support read
 
 ## Setup and installation 🚀 
 
-Before using this template, ensure you have [Node.js](https://nodejs.org/en) installed (version 20.12.0 for this template) and [Docker](https://www.docker.com/) installed and running.
+Before using this template, ensure you have [Node.js](https://nodejs.org/en) installed (version 22.15.0 for this template) and [Docker](https://www.docker.com/) installed and running.
 
 ### Steps
 
