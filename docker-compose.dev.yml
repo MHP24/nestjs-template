@@ -3,10 +3,10 @@ services:
     container_name: nestjs-skeleton
     env_file:
       - .env
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile.dev
-    ports:
-      - ${PORT}:${PORT}
     volumes:
       - ./src:/usr/src/app/src
+    ports:
+      - ${PORT}:${PORT}
