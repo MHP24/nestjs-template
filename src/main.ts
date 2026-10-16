@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { envs } from './config';
 import { ValidationPipe } from '@nestjs/common';
+import { AppModule } from '@/app.module';
+import { envs } from '@/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +14,9 @@ async function bootstrap() {
       forbidUnknownValues: true,
     }),
   );
+
+  // * Graceful shutdown on SIGTERM/SIGINT (lifecycle hooks, close connections)
+  app.enableShutdownHooks();
   await app.listen(envs.port);
 }
-bootstrap();
+void bootstrap();

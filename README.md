@@ -1,59 +1,114 @@
-<h1 align="center"> ⭐ NestJS Template ⭐</h1>
+<h1 align="center">⭐ NestJS Template ⭐</h1>
 
 <div align="center">
   <a href="https://mg-hp.com/" target="blank">
     <img src="https://github.com/marwin1991/profile-technology-icons/assets/136815194/519bfaf3-c242-431e-a269-876979f05574" width="200" alt="NestJS logo" />
   </a>
 
-  <div align="center">
-    <img src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" width="30" height="30"/>
-    <img src="https://user-images.githubusercontent.com/25181517/117207330-263ba280-adf4-11eb-9b97-0ac5b40bc3be.png" width="30" height="30"/>
-    <img src="https://user-images.githubusercontent.com/25181517/187955008-981340e6-b4cc-441b-80cf-7a5e94d29e7e.png" width="30" height="30"/>
-  </div>
+  <p>
+    <strong>A ready-to-use NestJS starter with linting, commit conventions, env validation and Docker hot reload — on any OS.</strong>
+  </p>
+
+  <p>
+    <img src="https://img.shields.io/badge/node-24.21.0-5FA04E?logo=nodedotjs&logoColor=white" alt="Node.js 24.21.0" />
+    <img src="https://img.shields.io/badge/NestJS-12-E0234E?logo=nestjs&logoColor=white" alt="NestJS 12" />
+    <img src="https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white" alt="TypeScript 6" />
+    <img src="https://img.shields.io/badge/ESLint-10-4B32C3?logo=eslint&logoColor=white" alt="ESLint 10" />
+    <img src="https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white" alt="Docker ready" />
+  </p>
 </div>
 
+---
 
-## About this template 📕
-This template includes a development setup and environment multi OS support ready-to-use outside the box, and has the config ready for:
+## 📕 About
 
-<ul>
-  <li>ESLint</li>
-  <li>Prettier integration</li>
-  <li>Docker hot reload feature (Windows supported)</li>
-  <li>Husky integration</li>
-  <li>Commit lint (Conventional commits standard)</li>
-  <li>Joi .env validation schema</li>
-</ul>
+This template gives you a clean NestJS project with the tooling already wired up, so you can start writing features instead of configuring them. It works the same on macOS, Linux and Windows, including hot reload inside Docker.
 
-## Setup and installation 🚀 
+Testing is intentionally left out: pick the framework that fits your project (Jest, Vitest, etc.).
 
-Before using this template, ensure you have [Node.js](https://nodejs.org/en) installed (version 22.15.0 for this template) and [Docker](https://www.docker.com/) installed and running.
+## ✨ Features
 
-### Steps
+| Feature | Details |
+|---|---|
+| **ESLint + Prettier** | Flat config with `typescript-eslint` and Prettier integration |
+| **Git hooks** | Husky runs ESLint on staged files before each commit and builds before each push |
+| **Conventional Commits** | Commit messages are validated with commitlint |
+| **Env validation** | `.env` variables are validated at startup with Joi; the app fails fast if something is missing |
+| **Global validation pipe** | DTOs are validated and unknown properties are rejected |
+| **Graceful shutdown** | Shutdown hooks are enabled, so lifecycle hooks run on `SIGTERM`/`SIGINT` |
+| **Path alias** | Import from `@/` instead of long relative paths (`@/config` → `src/config`) |
+| **Docker hot reload** | File-polling watch mode, so changes are picked up on Windows too |
 
- 1 . Install dependencies using [yarn](https://yarnpkg.com/) as package manager:
+## 📋 Requirements
+
+- [Node.js](https://nodejs.org/en) **24.21.0** (pinned in `.nvmrc`, so `nvm use` picks it up)
+- [Yarn](https://classic.yarnpkg.com/) 1.x
+- [Docker](https://www.docker.com/) (optional, only for the Docker workflow)
+
+## 🚀 Getting started
+
+**1. Install dependencies**
+
 ```bash
-  yarn
+nvm use
+yarn
 ```
 
- 2 . Replace .env.template variables and rename it as __.env file__
+**2. Set up your environment variables**
 
-#### __Environment variables specification__ &nbsp;
+Copy the template and fill in the values:
 
-|   |   |   |
+```bash
+cp .env.template .env
+```
+
+| Variable | Type | Description |
 |---|---|---|
-|Variable|Type|Description|
-|PORT | Integer (positive) | Port where app runs |
+| `PORT` | Positive integer | Port the app listens on |
 
-<hr>
- 
- 3 . __Development mode using Docker:__ Run Docker compose file in the branch directory:
+**3. Run the app**
+
+With Docker:
+
 ```bash
-  docker-compose -f docker-compose.dev.yml up --build
+docker compose -f docker-compose.dev.yml up --build
 ```
 
+Without Docker:
 
- 4 . __Development mode without Docker:__ Start the development server:
 ```bash
-  yarn start:dev
+yarn start:dev
 ```
+
+## 🛠️ Scripts
+
+| Command | Description |
+|---|---|
+| `yarn start:dev` | Start in watch mode |
+| `yarn start:debug` | Start in watch mode with the debugger attached |
+| `yarn build` | Compile the project into `dist/` |
+| `yarn start:prod` | Run the compiled build |
+| `yarn lint` | Lint and auto-fix TypeScript files |
+| `yarn format` | Format source files with Prettier |
+
+## 📁 Project structure
+
+```
+src/
+├── config/
+│   ├── app.config.ts   # Env loading and Joi validation schema
+│   └── index.ts
+├── app.module.ts       # Root module
+└── main.ts             # Bootstrap: validation pipe, shutdown hooks
+```
+
+## 📝 Commit conventions
+
+Commits must follow the [Conventional Commits](https://www.conventionalcommits.org/) format, otherwise the commit is rejected:
+
+```bash
+git commit -m "feat(users): add sign-up endpoint"
+git commit -m "fix: handle missing PORT variable"
+```
+
+Common types: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `perf`, `ci`.

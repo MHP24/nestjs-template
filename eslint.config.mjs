@@ -1,11 +1,10 @@
 import globals from 'globals';
 import js from '@eslint/js';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
-import prettierPlugin from 'eslint-plugin-prettier';
-import prettierConfig from 'eslint-config-prettier';
+import tseslint from 'typescript-eslint';
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import { defineConfig } from 'eslint/config';
 
-export default [
+export default defineConfig(
   {
     ignores: [
       'dist/**',
@@ -17,23 +16,18 @@ export default [
     ],
   },
   js.configs.recommended,
+  tseslint.configs.recommended,
+  prettierRecommended,
   {
     files: ['**/*.{js,mjs,cjs,ts}'],
     languageOptions: {
-      parser: tsParser,
       parserOptions: {
-        project: './tsconfig.json',
-        tsconfigRootDir: '.',
-        sourceType: 'module',
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
       globals: globals.node,
     },
-    plugins: {
-      '@typescript-eslint': tsPlugin,
-      prettier: prettierPlugin,
-    },
     rules: {
-      ...tsPlugin.configs.recommended.rules,
       '@typescript-eslint/naming-convention': [
         'error',
         {
@@ -43,17 +37,16 @@ export default [
       ],
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        { 'argsIgnorePattern': '^_', 'varsIgnorePattern': '^_' }
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
-      'prettier/prettier': ['error', { 'endOfLine': 'auto' }],
+      'prettier/prettier': ['error', { endOfLine: 'auto' }],
       'no-console': 'warn',
-      '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/await-thenable': 'warn',
+      '@typescript-eslint/no-floating-promises': 'warn',
       'linebreak-style': 'off',
     },
   },
-  prettierConfig,
-];
+);
