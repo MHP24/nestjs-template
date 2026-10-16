@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 import * as joi from 'joi';
-config();
+config({ quiet: true });
 
 interface EnvVars {
   PORT: number;
